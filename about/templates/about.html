@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+<!--{% load static %}-->
+<!--{% load bleach_tags %}-->
+{% block additional_header_items %}
+    <script>currentTab="about";</script>
+{% endblock additional_header_items %}
+
+{% block tab_name %}
+    About
+{% endblock tab_name %}
+
+{% block content %}
+    <h2>Intro</h2>
+    <p>Hi, my name is Isaac. I'm a somewhat functional introvert. I like to learn, program, and game.</p>
+    <p>
+        I'm happily married to a wonderful woman. I'm also the son of a U.S. Army veteran, whom I respect and admire greatly.
+    </p>
+    <p>
+        I've been a computer nerd since Kindergarten. One day, we were doing word association in class. Most kids said "cat" when the teacher said "mouse." I said "computer."
+    </p>
+    <h2>Free Time</h2>
+    <p>In my free time, you'll usually find me doing one of a few things:</p>
+    <ul>
+        <li>Watching YouTube—either learning something useful or doom-scrolling brainrot.</li>
+        <li>Programming something just to learn or experiment with something new.</li>
+        <li>
+            Playing a game... or compulsively scrolling through my library, hoping something triggers that sweet dopamine hit.
+        </li>
+    </ul>
+    <h2>Learning</h2>
+    <p>As of writing (January 2025), I'm a student at Western Governors University, working toward a BSCS.</p>
+    <p>
+        Until I graduate, this is one of my top priorities. I started in December 2024, and as of the end of January, I’m almost done with my first term—even though it’s scheduled to run until May.
+    </p>
+    <p>
+        Otherwise, I’m self-teaching, researching, or experimenting with programming languages and techniques to stay versatile.
+    </p>
+    <h2>Goals</h2>
+    <p>Not much, just a few totally reasonable things:</p>
+    <ol>
+        <li>Take care of my family.</li>
+        <li>Graduate with my Bachelor's.</li>
+        <li>Become a professional developer.</li>
+        <li>Attain financial freedom.</li>
+        <li>Retire comfortably at my baseline standard of living.</li>
+        <li>Die old... or not at all.</li>
+    </ol>
+    <h2>What Else?</h2>
+    <p>Stuff that didn’t fit neatly anywhere else:</p>
+    <ul>
+        <li>
+            I reverse-engineered Flash games as a kid, and now I build things with Unity, Godot, and whatever else looks fun.
+        </li>
+        <li>If there's a way to automate it, I’ll probably try.</li>
+        <li>I'm good at breaking things… but also fixing them, so it balances out.</li>
+        <li>
+            My idea of "taking a break" usually involves learning a new programming language or tech I may never actually use.
+        </li>
+        <li>
+            I've dabbled in everything from Windows development to web apps to hardware projects. If it involves code, I’ll probably tinker with it.
+        </li>
+        <li>Yes, I automate things, but no, I haven’t figured out how to automate my life yet—still working on that.</li>
+    </ul>
+    <div class="text-center my-2">
+        <a href="mailto:isaachisey@gmail.com"
+           target="_blank"
+           class="btn btn-success btn-lg shadow text-shadow">Get in Touch</a>
+    </div>
+{% endblock content %}

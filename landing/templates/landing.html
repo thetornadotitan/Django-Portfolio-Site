@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block additional_header_items %}
+  <link rel="stylesheet" href="{% static "landing.css" %}" />
+  <script>currentTab="home"</script>
+  <script defer src="{% static "landing.js" %}"></script>
+{% endblock additional_header_items %}
+
+{% block tab_name %}
+  Home
+{% endblock tab_name %}
+
+{% block content %}
+  <div class="m-4 text-center d-flex justify-content-center flex-wrap ">
+    <img src="{% static "me/professional.png" %}"
+         class="rounded m-2"
+         alt="profile icon me Isaac Hisey"
+         width="88px"
+         height="88px" />
+    <div>
+      <h2>Guiding Traits</h2>
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="p-1 m-1 rounded bg-primary text-white shadow text-shadow">Self Motivated</div>
+        <div class="p-1 m-1 rounded bg-primary text-white shadow text-shadow">Analytical</div>
+        <div class="p-1 m-1 rounded bg-primary text-white shadow text-shadow">Collaborative</div>
+        <div class="p-1 m-1 rounded bg-primary text-white shadow text-shadow">Resilient</div>
+        <div class="p-1 m-1 rounded bg-primary text-white shadow text-shadow">Driven</div>
+      </div>
+    </div>
+  </div>
+  <h2 class="text-center mb-4">Hello!</h2>
+  <div class="d-flex justify-content-center">
+    <p class="w-50">
+      "Hi, I’m Isaac Hisey – a software developer with a passion for creating intuitive applications and solving complex problems. I specialize in full-stack development, system administration, and data analytics. I’m always seeking new challenges and ways to contribute to innovative projects."
+    </p>
+  </div>
+  <h2 class="text-center mb-4">My Technical Toolkit</h2>
+  <div class="text-center d-flex justify-content-around flex-wrap">
+    <div class="skill-wrapper">
+      <h3>Software Development</h3>
+      <hr>
+      <h4>Languages</h4>
+      <ul class="skill-catagory">
+        <li>C#</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+      </ul>
+      <h4>Frontends</h4>
+      <ul class="skill-catagory">
+        <li>WPF</li>
+        <li>React</li>
+        <li>Vue</li>
+        <li>HTMX</li>
+      </ul>
+      <h4>Backends</h4>
+      <ul class="skill-catagory">
+        <li>Django</li>
+        <li>Node.js</li>
+        <li>Express</li>
+        <li>Socket.IO</li>
+        <li>Electron</li>
+        <li>API Development</li>
+        <li>API Integration</li>
+      </ul>
+      <h4>Tools &amp; IDEs</h4>
+      <ul class="skill-catagory">
+        <li>VS Code</li>
+        <li>Visual Studio</li>
+        <li>Godot</li>
+        <li>Unity3D</li>
+      </ul>
+    </div>
+    <div class="skill-wrapper">
+      <h3>System Administration</h3>
+      <hr>
+      <h4>Operating Systems</h4>
+      <ul class="skill-catagory">
+        <li>Windows</li>
+        <li>Ubuntu</li>
+        <li>iOS</li>
+        <li>MacOS</li>
+      </ul>
+      <h4>Web Servers</h4>
+      <ul class="skill-catagory">
+        <li>Nginx</li>
+        <li>Apache</li>
+      </ul>
+      <h4>Databasing</h4>
+      <ul class="skill-catagory">
+        <li>SQL</li>
+        <li>PostgreSQL</li>
+        <li>MySQL</li>
+        <li>MongoDB</li>
+      </ul>
+      <h4>Cloud Services</h4>
+      <ul class="skill-catagory">
+        <li>AWS</li>
+        <li>Cloudflare</li>
+      </ul>
+    </div>
+    <div class="skill-wrapper">
+      <h3>Data Analysis</h3>
+      <hr>
+      <h4>EHRs</h4>
+      <ul class="skill-catagory">
+        <li>Athena</li>
+      </ul>
+      <h4>CRMs</h4>
+      <ul class="skill-catagory">
+        <li>ServiceNow</li>
+        <li>SalesForce</li>
+        <li>ZenDesk</li>
+      </ul>
+      <h4>Data Warehousing</h4>
+      <ul class="skill-catagory">
+        <li>Google BigQuery</li>
+      </ul>
+      <h4>Visualization and Reporting</h4>
+      <ul class="skill-catagory">
+        <li>Google Sheets</li>
+        <li>App Scripts</li>
+        <li>Excel</li>
+        <li>Tableau</li>
+        <li>Mode</li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center my-2">
+    <a href="mailto:isaachisey@gmail.com"
+       target="_blank"
+       class="btn btn-success btn-lg shadow text-shadow">Get in Touch</a>
+  </div>
+{% endblock content %}

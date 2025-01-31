@@ -1,0 +1,9 @@
+Django==5.1.4
+django_summernote==0.8.20.0
+django_tinymce==4.1.0
+python-dotenv==1.0.1
+bleach==5.0.1
+django-bleach==3.1.0
+gunicorn==23.0.0
+whitenoise==6.8.2
+Pillow==11.1.0
