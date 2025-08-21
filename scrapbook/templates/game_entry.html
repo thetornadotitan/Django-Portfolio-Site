@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bleach_tags %}
+{% load timefmt %}
+
+{% block additional_header_items %}
+<style>
+  .rating-badge {
+    min-width: 48px;
+  }
+  .meta-label {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    opacity: .75;
+  }
+</style>
+<script>currentTab="scrapbook"</script>
+{% endblock additional_header_items %}
+
+{% block tab_name %}
+    {{ game_entry.game_title }}
+{% endblock tab_name %}
+
+{% block content %}
+<div class="container my-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/scrapbook/">Games</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ game_entry.game_title }}</li>
+    </ol>
+  </nav>
+
+  <div class="d-flex align-items-center mb-3">
+    <h1 class="me-3 mb-0">{{ game_entry.game_title }}</h1>
+    {% if game_entry.status %}
+      <span class="badge text-bg-primary">{{ game_entry.status.status }}</span>
+    {% endif %}
+  </div>
+
+  <div class="row g-4">
+    <!-- Left: Meta Card -->
+    <div class="col-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-3">
+            <div class="meta-label">Platform</div>
+            <div>{{ game_entry.platform|default:"—" }}</div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="meta-label">Started</div>
+              <div>{{ game_entry.started|date:"M j, Y"|default:"—" }}</div>
+            </div>
+            <div class="col-6">
+              <div class="meta-label">Finished</div>
+              <div>{{ game_entry.finished|date:"M j, Y"|default:"—" }}</div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row g-3">
+              <div class="col-6">
+                <div class="meta-label">Est. Time</div>
+                <div>{{ game_entry.estimated_play_time|hhmm|default:"—" }}</div>
+              </div>
+            <div class="col-6">
+              <div class="meta-label">Play Time</div>
+              <div>{{ game_entry.play_time|hhmm|default:"—" }}</div>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="mb-2">
+            <div class="meta-label">Initiator</div>
+            <div>{{ game_entry.initiator.get_full_name|default:game_entry.initiator.username|default:"—" }}</div>
+          </div>
+
+          <div class="row g-2">
+            <div class="col-12">
+              <div class="meta-label">Genre</div>
+              <div>{{ game_entry.genre|default:"—" }}</div>
+            </div>
+            <div class="col-12">
+              <div class="meta-label">Franchise</div>
+              <div>{{ game_entry.franchise|default:"—" }}</div>
+            </div>
+            <div class="col-12">
+              <div class="meta-label">Series</div>
+              <div>{{ game_entry.series|default:"—" }}</div>
+            </div>
+          </div>
+
+          <hr class="my-3">
+
+          <!-- Ratings -->
+          <div class="meta-label mb-2">Ratings</div>
+
+          {% if game_entry.t_rating %}
+          <div class="d-flex align-items-center mb-2">
+            <span class="badge text-bg-dark me-2 rating-badge">T</span>
+            <div class="flex-grow-1">
+              <div class="progress" role="progressbar" aria-label="T rating" aria-valuenow="{{ game_entry.t_rating }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: {{ game_entry.t_rating }}%">{{ game_entry.t_rating }}%</div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if game_entry.h_rating %}
+          <div class="d-flex align-items-center">
+            <span class="badge text-bg-dark me-2 rating-badge">H</span>
+            <div class="flex-grow-1">
+              <div class="progress" role="progressbar" aria-label="H rating" aria-valuenow="{{ game_entry.h_rating }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: {{ game_entry.h_rating }}%">{{ game_entry.h_rating }}%</div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if not game_entry.t_rating and not game_entry.h_rating %}
+            <div class="text-muted">No ratings yet.</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="small text-muted mt-2">
+        Created {{ game_entry.created|date:"M j, Y, g:i a" }} · Updated {{ game_entry.updated|date:"M j, Y, g:i a" }}
+      </div>
+    </div>
+
+    <!-- Right: Body -->
+    <div class="col-12 col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Scrapbook Entry</h5>
+          {% if game_entry.body %}
+            <div class="prose">
+              {{ game_entry.body|bleach }}
+            </div>
+          {% else %}
+            <p class="text-muted mb-0">Memories in progress...</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

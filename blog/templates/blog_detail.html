@@ -4,35 +4,52 @@
 {% load bleach_tags %}
 
 {% block additional_header_items %}
-    <script>currentTab="blog"</script>
+<style>
+  .article-card { border-radius: .75rem; overflow: hidden; }
+  .article-title { font-weight: 700; }
+  .meta { font-size: .9rem; opacity: .65; }
+  .content-body img { max-width: 100%; height: auto; border-radius: .5rem; }
+  .content-body pre { padding: 1rem; border-radius: .5rem; background: #0e0e11; color: #fff; overflow: auto; }
+  .divider { height: 1px; background: rgba(0,0,0,.08); margin: 1rem 0; }
+</style>
+<script>currentTab="blog"</script>
 {% endblock additional_header_items %}
 
 {% block tab_name %}
-    {{ post.title | bleach }}
+  {{ post.title|bleach }}
 {% endblock tab_name %}
 
 {% block content %}
-    <div class="m-2 p-2 border rounded">
-        <a class="link-offset-2 link-underline link-underline-opacity-0"
-           href="#">
-            <h2 class="text-center">{{ post.title | bleach }}</h2>
-        </a>
-        <hr />
-        <div class="post-summary">{{ post.summary | bleach }}</div>
-        <hr />
-        <hr />
-        <div class="post-body">{{ post.body | bleach }}</div>
-        <hr />
-        <div class="d-flex justify-content-evenly flex-wrap text-center">
-            <small class="m-2">Author: {{ post.author.first_name | bleach }} {{ post.author.last_name | bleach }}
-                <br />
-            AKA: {{ post.author.username | bleach }}</small>
-            <small class="m-2">Created:
-                <br />
-            {{ post.updated }}</small>
-            <small class="m-2">Last Updated:
-                <br />
-            {{ post.created }}</small>
-        </div>
+<div class="container my-4 article">
+  <a href="{% url 'blog' %}" class="text-decoration-none small d-inline-flex align-items-center mb-3">
+    ← Back to Blog
+  </a>
+
+  <article class="card article-card shadow-sm">
+    <div class="card-body">
+      <!-- Title -->
+      <h1 class="h2 article-title mb-2 text-center">{{ post.title|bleach }}</h1>
+
+      <!-- Meta -->
+      <div class="meta d-flex flex-wrap gap-2 justify-content-center mb-3">
+        <small class="badge bg-light text-dark chip">Author: {{ post.author.first_name|bleach }} {{ post.author.last_name|bleach }} ({{ post.author.username|bleach }})</small>
+        <small class="badge bg-light text-dark chip">Created: {{ post.created }}</small>
+        <small class="badge bg-light text-dark chip">Last Updated: {{ post.updated }}</small>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Summary -->
+      {% if post.summary %}
+      <p class="lead text-muted text-center">{{ post.summary|bleach }}</p>
+      <div class="divider"></div>
+      {% endif %}
+
+      <!-- Body -->
+      <div class="content-body">
+        {{ post.body|bleach }}
+      </div>
     </div>
+  </article>
+</div>
 {% endblock content %}

@@ -30,6 +30,7 @@ urlpatterns = [
     path("", include("blog.urls")),
     path("", include("about.urls")),
     path("", include("projects.urls")),
+    path("", include("scrapbook.urls")),
 ]
 
 if settings.DEBUG:

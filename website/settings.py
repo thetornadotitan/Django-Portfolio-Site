@@ -17,6 +17,16 @@ from dotenv.main import load_dotenv
 SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
 
+ALLOWED_HOSTS = ["isaachisey.com", "127.0.0.1"]
+
+# 1) Trust your site’s HTTPS origins (Django 4+ requires scheme in entries)
+CSRF_TRUSTED_ORIGINS = [
+    "https://isaachisey.com",
+    "https://www.isaachisey.com",  # include if you might use www
+]
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +51,7 @@ INSTALLED_APPS = [
     "blog.apps.BlogConfig",
     "about.apps.AboutConfig",
     "projects.apps.ProjectsConfig",
+    "scrapbook.apps.ScrapbookConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -138,8 +149,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 def example_test_func(request):
-    return request.user.groups.filter(name='Site Admin').exists()
-
+    return request.user.has_perm('django_summernote.add_attachment')
 
 SUMMERNOTE_CONFIG = {
     # Require users to be authenticated for uploading attachments.
@@ -154,6 +164,7 @@ SUMMERNOTE_CONFIG = {
     # test_func in summernote upload view. (Allow upload images only when user passes the test)
     # https://docs.djangoproject.com/en/2.2/topics/auth/default/#django.contrib.auth.mixins.UserPassesTestMixin
     'test_func_upload_view': example_test_func,
+    'attachment_filesize_limit': 100 * 1024 * 1024,  # 100 MB
 }
 
 # Allowed HTML Tags
@@ -191,3 +202,26 @@ BLEACH_STRIP_TAGS = True
 
 # Strip comments, or leave them in.
 BLEACH_STRIP_COMMENTS = True
+
+# Maximum size of uploaded files in bytes (e.g., 100 MB)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 100 * 1024 * 1024  # 100 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 100 * 1024 * 1024  # 100 MB
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bleach_tags %}
+{% load timefmt %}
+
+{% block additional_header_items %}
+<style>
+  .game-card:hover {
+    transform: translateY(-2px);
+    transition: transform .15s ease, box-shadow .15s ease;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+  }
+</style>
+<script>currentTab="scrapbook"</script>
+{% endblock additional_header_items %}
+
+{% block tab_name %}Scrapbook{% endblock tab_name %}
+
+{% block content %}
+<div class="container my-4">
+  {% for status, games in game_entries.items %}
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <h2 class="h5 mb-0">{{ status }}</h2>
+      <span class="badge text-bg-secondary">{{ games|length }}</span>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3 mb-4">
+      {% for game in games %}
+        <div class="col">
+          <div class="card h-100 game-card">
+            <div class="card-body d-flex align-items-start justify-content-between">
+              <h3 class="h6 mb-0">
+                <a class="stretched-link text-decoration-none"
+                   href="{% url 'game_entry' game.pk game.game_title|slugify %}">
+                  {{ game.game_title }}
+                </a>
+              </h3>
+              {% if game.platform %}
+                <span class="badge text-bg-light border ms-2">{{ game.platform }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col">
+          <div class="alert alert-secondary">No games</div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+{% endblock content %}

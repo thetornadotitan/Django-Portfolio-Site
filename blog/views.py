@@ -16,7 +16,7 @@ def blog_detail(request, blog_id, title=None):
 
     # If the title is not provided or doesn't match the slugified title, redirect to the correct URL
     if title != slugified_title:
-        return redirect('blog_detail', blog_id=post.id, title=slugified_title)
+        return redirect('blog_detail', blog_id=post.pk, title=slugified_title)
 
     # Render the post detail page
     return render(request, 'blog_detail.html', {'post': post})
